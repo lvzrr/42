@@ -1,6 +1,8 @@
 char	*ft_strcat(char *dest, char *src)
 {
-	char *origin = dest;
+	char	*origin;
+
+	origin = dest;
 	while (*dest)
 		dest++;
 	while (*src)

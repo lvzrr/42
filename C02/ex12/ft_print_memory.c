@@ -89,11 +89,11 @@ void	ft_print_memory(void *addr, unsigned int size)
 	}
 }
 
-int	main(void)
-{
-	char	*tab;
-
-	tab = "Hello, World";
-	ft_print_memory(tab, 12);
-	return (0);
-}
+// int	main(void)
+// {
+// 	char	*tab;
+//
+// 	tab = "Hello, World";
+// 	ft_print_memory(tab, 12);
+// 	return (0);
+// }
