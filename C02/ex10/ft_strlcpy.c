@@ -9,7 +9,6 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int size)
 		len++;
 	if (size == 0)
 		return (len);
-
 	while (*start && --size)
 		*dst++ = *start++;
 	*dst = '\0';

@@ -20,33 +20,23 @@ void	ft_put_ptr_addr(unsigned long addr)
 	}
 }
 
-void	ft_print_str(char *str)
+void	ft_print_str(char *str, unsigned int *size)
 {
 	unsigned int	i;
-	unsigned int	rem;
 
 	i = 0;
-	while (i < 16 && *str)
+	while (i < 16 && *size > 0)
 	{
-		if (str[i] >= 33 && str[i] <= 126)
+		if (str[i] >= 32 && str[i] <= 126)
 			write(1, &str[i], 1);
 		else
 			write(1, ".", 1);
 		i++;
-	}
-	rem = i % 16;
-	i = 0;
-	if (rem > 0)
-	{
-		while (i <= rem)
-		{
-			write(1, ".", 1);
-			i++;
-		}
+		*size -= 1;
 	}
 }
 
-void	ft_print_hex_str(char *str)
+void	ft_print_hex_str(char *str, unsigned int *size)
 {
 	int				i;
 	const char		*hex_base;
@@ -56,15 +46,18 @@ void	ft_print_hex_str(char *str)
 	hex_base = "0123456789abcdef";
 	while (i < 16)
 	{
-		if (str[i])
-			c = (unsigned char)str[i];
+		if (*size == 0)
+			write(1, "  ", 2);
 		else
-			c = 0;
-		write(1, &hex_base[c / 16], 1);
-		write(1, &hex_base[c % 16], 1);
+		{
+			c = (unsigned char)str[i];
+			write(1, &hex_base[c / 16], 1);
+			write(1, &hex_base[c % 16], 1);
+		}
 		if (i % 2)
 			write(1, " ", 1);
 		i++;
+		*size -= 1;
 	}
 }
 
@@ -73,7 +66,11 @@ void	ft_print_memory(void *addr, unsigned int size)
 	unsigned int	c;
 	unsigned long	l;
 	char			*ch;
+	unsigned int	h_l;
+	unsigned int	s_l;
 
+	h_l = size;
+	s_l = h_l;
 	c = 0;
 	l = (unsigned long)addr;
 	ch = (char *)addr;
@@ -81,19 +78,10 @@ void	ft_print_memory(void *addr, unsigned int size)
 	{
 		ft_put_ptr_addr(l + c);
 		write(1, ": ", 2);
-		ft_print_hex_str(&ch[c]);
+		ft_print_hex_str(&ch[c], &h_l);
 		write(1, " ", 1);
-		ft_print_str(&ch[c]);
+		ft_print_str(&ch[c], &s_l);
 		write(1, "\n", 1);
 		c += 16;
 	}
 }
-
-// int	main(void)
-// {
-// 	char	*tab;
-//
-// 	tab = "Hello, World";
-// 	ft_print_memory(tab, 12);
-// 	return (0);
-// }

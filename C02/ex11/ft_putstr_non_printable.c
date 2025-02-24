@@ -7,12 +7,12 @@ void	ft_putchar(char c)
 
 int	ft_is_printable(char c)
 {
-	return (c >= 32 && c <= 126); 
+	return (c >= 32 && c <= 126);
 }
 
 void	ft_print_hex(unsigned char c, int rec_check)
 {
-	const char *hex_base;
+	const char	*hex_base;
 
 	hex_base = "0123456789abcdef";
 	if (c >= 16)
@@ -20,7 +20,7 @@ void	ft_print_hex(unsigned char c, int rec_check)
 		ft_print_hex(c / 16, 1);
 		ft_print_hex(c % 16, 1);
 	}
-	else 
+	else
 	{
 		if (rec_check == 0)
 			ft_putchar('0');

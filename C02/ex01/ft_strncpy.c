@@ -5,11 +5,12 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	r = dest;
 	while (n-- != 0)
 	{
-		if (((*dest++ = *src++) == 0))
+		*dest++ = *src;
+		if (!*src++)
 		{
 			while (--n != 0)
 				*dest++ = 0;
-			break;
+			break ;
 		}
 	}
 	return (r);
