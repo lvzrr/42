@@ -61,7 +61,7 @@ void	ft_print_hex_str(char *str, unsigned int *size)
 	}
 }
 
-void	ft_print_memory(void *addr, unsigned int size)
+void	*ft_print_memory(void *addr, unsigned int size)
 {
 	unsigned int	c;
 	unsigned long	l;
@@ -84,4 +84,5 @@ void	ft_print_memory(void *addr, unsigned int size)
 		write(1, "\n", 1);
 		c += 16;
 	}
+	return (addr);
 }
