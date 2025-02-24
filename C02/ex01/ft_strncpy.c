@@ -1,11 +1,11 @@
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	unsigned int	c;
+	char	*r;
 
-	c = -1;
-	while (++c < n)
-	{
-		dest[c] = src[c];
-	}
-	return (dest);
+	r = dest;
+	while (*src && *dest && n--)
+		*dest++ = *src++;
+	while (*dest)
+		*dest++ = '\0';
+	return (r);
 }
