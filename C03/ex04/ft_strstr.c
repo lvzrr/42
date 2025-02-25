@@ -32,9 +32,7 @@ char	*ft_strstr(char *str, char *to_find)
 	while (*str)
 	{
 		if (ft_strncmp(str, to_find, l) == 0)
-		{
 			return (str);
-		}
 		str++;
 	}
 	return (NULL);
