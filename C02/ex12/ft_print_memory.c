@@ -44,20 +44,22 @@ void	ft_print_hex_str(char *str, unsigned int *size)
 
 	i = 0;
 	hex_base = "0123456789abcdef";
-	while (i < 16)
+	while (i < 16 && *size)
 	{
-		if (*size == 0)
-			write(1, "  ", 2);
-		else
-		{
-			c = (unsigned char)str[i];
-			write(1, &hex_base[c / 16], 1);
-			write(1, &hex_base[c % 16], 1);
-		}
+		c = (unsigned char)str[i];
+		write(1, &hex_base[c / 16], 1);
+		write(1, &hex_base[c % 16], 1);
 		if (i % 2)
 			write(1, " ", 1);
 		i++;
 		*size -= 1;
+	}
+	while (i < 16)
+	{
+		write(1, "  ", 2);
+		if (i % 2)
+			write(1, " ", 1);
+		i++;
 	}
 }
 
