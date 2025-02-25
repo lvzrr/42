@@ -3,12 +3,12 @@ unsigned int	ft_strlen(char *c)
 	unsigned int	l;
 
 	l = 0;
-	while(*c++)
+	while (*c++)
 		l++;
 	return (l);
 }
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int	n)
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int n)
 {
 	unsigned int	d_len;
 
