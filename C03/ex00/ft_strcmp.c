@@ -1,11 +1,11 @@
-int	ft_strcmp(char *a, char *b)
+int	ft_strcmp(char *s1, char *s2)
 {
-	while (*a && *b)
+	while (*s1 && *s2)
 	{
-		if (*a != *b)
-			return ((unsigned char)*a - (unsigned char)*b);
-		a++;
-		b++;
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
 	}
-	return ((unsigned char)*a - (unsigned char)*b);
+	return (*s1 - *s2);
 }
