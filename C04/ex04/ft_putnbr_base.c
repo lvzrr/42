@@ -1,4 +1,5 @@
 #include <unistd.h>
+
 unsigned int	ft_strlen(char *str)
 {
 	unsigned int	l;
@@ -33,7 +34,7 @@ int	ft_check_valid_base(char *base)
 	return (1);
 }
 
-void ft_putnbr_base(int nb, char *base)
+void	ft_putnbr_base(int nb, char *base)
 {
 	char				out;
 	unsigned int		i;

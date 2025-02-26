@@ -1,7 +1,7 @@
 int	ft_atoi(char *str)
 {
 	int	neg;
-	int out;
+	int	out;
 
 	neg = 1;
 	out = 0;
@@ -15,7 +15,8 @@ int	ft_atoi(char *str)
 			neg *= -1;
 		str++;
 	}
-	while (*str >= '0' && *str <= '9'){
+	while (*str >= '0' && *str <= '9')
+	{
 		out = out * 10 + (*str - '0');
 		str++;
 	}

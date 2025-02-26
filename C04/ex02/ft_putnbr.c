@@ -6,11 +6,11 @@ void	ft_putnbr(int nb)
 
 	if (nb == -2147483648)
 		write(1, "-2147483648", 11);
-	else 
+	else
 	{
 		if (nb < 0)
 		{
-			write(1, "-", 1);	
+			write(1, "-", 1);
 			nb = -nb;
 		}
 		if (nb > 9)
