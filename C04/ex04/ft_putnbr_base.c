@@ -1,33 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/26 14:31:27 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/02/26 18:35:51 by jaicastr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-unsigned int	ft_strlen(char *str)
+int	ft_check_valid_base(char *base, unsigned int size)
 {
-	unsigned int	l;
+	char	*dup;
 
-	l = 0;
-	while (*str++)
-		l++;
-	return (l);
-}
-
-int	ft_is_dupl(char c, char *str)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (1);
-		str++;
-	}
-	return (0);
-}
-
-int	ft_check_valid_base(char *base)
-{
-	if (ft_strlen(base) <= 1)
+	if (size <= 1)
 		return (0);
 	while (*base)
 	{
-		if (ft_is_dupl(*base, base + 1) || *base == '-' || *base == '+')
+		dup = base + 1;
+		while (*dup)
+			if (*dup++ == *base)
+				return (0);
+		if (*base == '-' || *base == '+')
 			return (0);
 		base++;
 	}
@@ -37,21 +34,25 @@ int	ft_check_valid_base(char *base)
 void	ft_putnbr_base(int nb, char *base)
 {
 	char				out;
+	char				*l;
 	unsigned int		i;
 	unsigned int		n;	
 
-	i = ft_strlen(base);
-	if (ft_check_valid_base(base))
+	i = 0;
+	l = base;
+	while (*l++)
+		i++;
+	l = base;
+	if (!ft_check_valid_base(base, i))
+		return ;
+	if (nb < 0)
 	{
-		if (nb < 0)
-		{
-			write(1, "-", 1);
-			nb = -nb;
-		}
-		n = (unsigned int) nb;
-		if (n >= i)
-			ft_putnbr_base(nb / i, base);
-		out = base[nb % i];
-		write(1, &out, 1);
+		write(1, "-", 1);
+		nb = -nb;
 	}
+	n = (unsigned int) nb;
+	if (n >= i)
+		ft_putnbr_base(nb / i, base);
+	out = base[nb % i];
+	write(1, &out, 1);
 }

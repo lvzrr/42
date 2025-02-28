@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_memory.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/25 11:29:11 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/02/25 11:29:14 by jaicastr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 void	ft_put_ptr_addr(unsigned long addr)
@@ -87,4 +99,10 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		c += 16;
 	}
 	return (addr);
+}
+
+int	main(void)
+{
+	char *c = "heloa buenas \0\0\n jasdjshajdh  \0";
+	ft_print_memory(c, 35);
 }

@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/25 12:26:00 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/02/26 15:07:14 by jaicastr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 int	ft_strncmp(char *s1, char *s2, unsigned int size)
 {
-	while (size > 0)
+	while (*s1 && *s2 && size--)
 	{
-		if (*s1 != *s2 || !*s1 ||!*s2)
-			return (*s1 - *s2);
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
 		s1++;
 		s2++;
-		size--;
 	}
+	if (size)
+		return ((unsigned char)*s1 - (unsigned char)*s2);
 	return (0);
 }
 
@@ -34,5 +46,5 @@ char	*ft_strstr(char *str, char *to_find)
 			return (str);
 		str++;
 	}
-	return (NULL);
+	return ((void *) 0);
 }

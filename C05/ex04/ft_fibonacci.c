@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/22 12:16:15 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/02/22 12:16:23 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/02/27 19:48:30 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/02/27 19:52:06 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_strlen(char *str)
-{
-	int	c;
 
-	c = 0;
-	while (*str++ != '\0')
-		c++;
-	return (c);
+int	ft_fibonacci(int index)
+{
+	if ()
+	
+	return ft_fibonacci();
 }
