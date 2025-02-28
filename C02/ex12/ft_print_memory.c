@@ -100,9 +100,3 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	}
 	return (addr);
 }
-
-int	main(void)
-{
-	char *c = "heloa buenas \0\0\n jasdjshajdh  \0";
-	ft_print_memory(c, 35);
-}
