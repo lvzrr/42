@@ -12,9 +12,12 @@
 
 int	ft_sqrt(int nb)
 {
+	int	init;
+
+	if (nb == 1)
+		return (nb);
 	if (nb < 0)
 		return (0);
-	int	init; 
 	init = 2;
 	while (init < 46341)
 	{
