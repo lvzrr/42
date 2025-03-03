@@ -38,7 +38,7 @@ int	ft_is_prime(int nb)
 		sq = nb - 1;
 	while (c <= sq)
 	{
-		if (nb % c == 0)
+		if (nb % c == 0 || nb == 2)
 			return (0);
 		c++;
 	}

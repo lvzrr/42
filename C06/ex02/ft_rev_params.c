@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iterative_power.c                               :+:      :+:    :+:   */
+/*   ft_print_params.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 19:19:54 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/02/27 19:24:48 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/03/01 16:30:19 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/03/01 16:39:08 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 
-int	ft_iterative_power(int nb, int power)
+void	ft_putstr(char *str)
 {
-	int	result;
+	while (*str)
+		write(1, str++, 1);
+	write(1, "\n", 1);
+}
 
-	if (power < 0)
-		return (0);
-	result = 1;
-	while (power-- > 0)
-		result *= nb;
-	return (result);
+int	main(int argc, char **argv)
+{
+	argc -= 1;
+	while (argc > 0)
+		ft_putstr(argv[argc--]);
+	return (0);
 }
