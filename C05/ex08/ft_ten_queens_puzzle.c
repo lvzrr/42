@@ -79,9 +79,3 @@ int	ft_ten_queens_puzzle(void)
 	solve(0, &solc);
 	return (solc);
 }
-
-int	main(void)
-{
-	ft_ten_queens_puzzle();
-	return (0);
-}
