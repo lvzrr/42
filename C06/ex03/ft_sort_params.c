@@ -6,72 +6,58 @@
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 16:43:13 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/03/01 16:43:14 by jaicastr         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:21:41 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 
-void	ft_swap_args(char **arg1, char **arg2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char *temp;
-
-	temp = *arg1;
-	*arg1 = *arg2;
-	*arg2 = temp;
-}
-
-int	ft_partition(char **argv, int l, int h)
-{
-	char	*p;
-	int		i;
-	int		j;
-	int		c;
-
-	p = argv[h];
-	i = l - 1;
-	j = l;
-	while (j < h)
+	while (*s1 == *s2 && *s1 && *s2)
 	{
-		while (argv[j][c] && p[c] 
-				&& argv[j][c] == p[c])
-            c++;
-		if (argv[j][c] != p[c])
-			{
-				if (argv[j][c] < p[c])
-				{
-					i++;
-					ft_swap_args(&argv[i], &argv[j]);
-				}
-			}
-			j++;
-		}
+		s1++;
+		s2++;
 	}
-	ft_swap_args(&argv[i + 1], &argv[h]);
-	return (i + 1);
+	return (*s1 - *s2);
 }
 
-void	ft_quicksort(char **argv, int l, int h)
+void	ft_swap(char **s1, char **s2)
 {
-	if (l < h)
-	{
-		int p = ft_partition(argv, l, h);
-		ft_quicksort(argv, l, p - 1);
-		ft_quicksort(argv, p + 1, h);
-	}
+	char	*tmp;
+
+	tmp = *s1;
+	*s1 = *s2;
+	*s2 = tmp;
 }
 
-int main (int argc, char **argv)
+void	ft_putstr(char *str)
 {
-	int c;
-	int c2;
+	while (*str)
+		write(1, str++, 1);
+	write(1, "\n", 1);
+}
 
-	ft_quicksort(argv, 1, argc - 1);
+int	main(int argc, char **argv)
+{
+	int	c;
+	int	c2;
+
 	c = 1;
 	while (c < argc)
 	{
-		c2 = 0;
-		while(argv[c][c2])
-			write(1, argv[c][c2++], 1);
+		c2 = 1 + c;
+		while (c2 < argc)
+		{
+			if (ft_strcmp(argv[c], argv[c2]) > 0)
+			{
+				ft_swap(&argv[c], &argv[c2]);
+			}
+			c2++;
+		}
 		c++;
 	}
+	c = 1;
+	while (c < argc)
+		ft_putstr(argv[c++]);
 	return (0);
 }

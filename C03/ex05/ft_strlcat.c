@@ -19,21 +19,20 @@ unsigned int	ft_strlen(char *c)
 	return (l);
 }
 
-int	ft_strlcat(char *dst, char *src, unsigned int size)
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int n)
 {
 	unsigned int	d_len;
+	unsigned int	d_len2;
 	unsigned int	s_len;
-	unsigned int	d2_len;
 
-	d_len = ft_strlen(dst);
+	d_len = ft_strlen(dest);
+	d_len2 = d_len;
 	s_len = ft_strlen(src);
-	d2_len = d_len;
-	if (size <= d_len)
-		return (s_len + size);
-	while (*dst)
-		dst++;
-	while (*src && d_len++ < size - 1)
-		*dst++ = *src++;
-	*dst = '\0';
-	return (d2_len + s_len);
+	if (n <= d_len)
+		return (s_len + n);
+	dest += d_len;
+	while (*src && d_len++ < n - 1)
+		*dest++ = *src++;
+	*dest = 0;
+	return (d_len2 + s_len);
 }

@@ -6,7 +6,7 @@
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 11:55:54 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/03/01 11:59:28 by jaicastr         ###   ########.fr       */
+/*   Updated: 2025/03/04 12:39:33 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ int	ft_sqrt(int nb)
 
 	if (nb < 0)
 		return (0);
-	init = 2;
-	while (init < 46341
-		|| init <= nb)
+	if (nb == 0 || nb == 1)
+		return (nb);
+	init = 1;
+	while (init <= 46340 && init * init <= nb + 1)
 	{
 		if (init * init == nb)
 			return (init);
@@ -32,6 +33,8 @@ int	ft_is_prime(int nb)
 	int	c;
 	int	sq;
 
+	if (nb <= 1)
+		return (0);
 	c = 2;
 	sq = ft_sqrt(nb);
 	if (sq == 0)

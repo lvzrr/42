@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: jaicastr <jaicastr@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 17:38:14 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/03/05 20:03:32 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/03/05 20:22:30 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/03/05 20:22:33 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 int	ft_check_in_base(char c, char *base)
 {
