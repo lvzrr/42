@@ -10,25 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_check_valid_base(char *base, unsigned int size)
-{
-	char	*dup;
-
-	if (size <= 1)
-		return (0);
-	while (*base)
-	{
-		dup = base + 1;
-		while (*dup)
-			if (*dup++ == *base)
-				return (0);
-		if (*base == '-' || *base == '+')
-			return (0);
-		base++;
-	}
-	return (1);
-}
-
 void	ft_putnbr_base(int nb, char *base)
 {
 	char				out;
