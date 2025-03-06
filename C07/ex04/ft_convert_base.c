@@ -92,7 +92,9 @@ int	cdigits(int n, int base_len)
 
 char	*ft_itoa_base(int n, char *base, int bl)
 {
-	// TODO
+	*base = n + '0';
+	n = bl;
+	return (base);
 }
 
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
@@ -115,7 +117,7 @@ int main(void)
 {
     char *result;
 
-    result = ft_convert_base("101", "01", "0123456789");
+    result = ft_convert_base("-101", "01", "0123456789");
     if (result)
     {
         free(result);
