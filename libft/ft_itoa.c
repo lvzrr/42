@@ -40,6 +40,8 @@ char	*ft_itoa(int n)
 
 	cc = count(n);
 	out = malloc(cc + 1);
+	if (!out)
+		return (NULL);
 	if (n < 0)
 		out[0] = '-';
 	out[cc] = 0;
