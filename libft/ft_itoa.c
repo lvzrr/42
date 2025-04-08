@@ -42,7 +42,7 @@ char	*ft_itoa(int n)
 	c = calc_size(&_n);
 	out = malloc(c + 1);
 	if (!out)
-	 return (NULL);
+		return (NULL);
 	if (n < 0)
 		out[0] = '-';
 	out[c] = 0;
