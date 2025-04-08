@@ -13,14 +13,12 @@
 
 char	*ft_strrchr(const char *haystack, int needle)
 {
-	unsigned int	l;
+	int	l;
 
 	if (!haystack)
 		return (NULL);
-	l = 0;
-	while (haystack[l])
-		l++;
-	while (l != 0 && haystack[l] != needle)
+	l = ft_strlen(haystack);
+	while (l >= 0 && haystack[l] != (char)needle)
 		l--;
 	return ((char *)(haystack + l));
 }
