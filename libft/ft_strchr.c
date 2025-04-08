@@ -16,9 +16,9 @@ char	*ft_strchr(const char *haystack, int needle)
 	unsigned int	i;
 
 	i = 0;
-	while (haystack[i] && haystack[i] != needle)
+	while (haystack[i] && haystack[i] != (char)needle)
 		i++;
-	if (haystack[i] == 0 && needle != 0)
+	if (haystack[i] == 0 && (char)needle != 0)
 		return ((void *) 0);
 	return ((char *)(haystack + i));
 }
