@@ -58,7 +58,7 @@ BONUS = ft_lstnew.c			\
 SRCOBJ = $(SRC:.c=.o)
 BONUSOBJ = $(BONUS:.c=.o)
 
-COMPILER = gcc
+COMPILER = cc
 FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
