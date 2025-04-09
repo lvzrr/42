@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, unsigned int n)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t n)
 {
-	unsigned int	i;
-	unsigned int	l;
+	size_t	i;
+	size_t	l;
 
 	i = 0;
 	l = 0;

@@ -16,7 +16,7 @@ char	*ft_strrchr(const char *haystack, int needle)
 	int	l;
 
 	l = ft_strlen(haystack);
-	while (l >= 0 && haystack[l] != (char)needle)
+	while (l != 0 && haystack[l] != (char)needle)
 		l--;
 	if (haystack[l] != (char)needle)
 		return (NULL);
