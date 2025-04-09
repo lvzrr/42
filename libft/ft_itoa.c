@@ -35,19 +35,24 @@ static int	_abs(int x)
 
 char	*ft_itoa(int n)
 {
+	int				neg;
 	char			*out;
 	unsigned int	cc;
 
 	cc = count(n);
+	neg = 1;
 	out = malloc(cc + 1);
 	if (!out)
 		return (NULL);
 	if (n < 0)
+	{
 		out[0] = '-';
+		neg = -1; 
+	}
 	out[cc] = 0;
 	while (cc > 0 || n != 0)
 	{
-		if (out[0] == '-' && cc == 1)
+		if (neg == -1 && cc == 1)
 			break ;
 		out[--cc] = '0' + _abs(n % 10);
 		n /= 10;
