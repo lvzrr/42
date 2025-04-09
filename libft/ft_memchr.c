@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-void	*ft_memchr(void *ptr, int c, unsigned int n)
+void	*ft_memchr(const void *ptr, int c, unsigned int n)
 {
 	unsigned int	i;
 	unsigned char	*p;

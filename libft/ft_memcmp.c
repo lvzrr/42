@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_memcmp(void *r1, void *r2, unsigned int n)
+int	ft_memcmp(const void *r1, const void *r2, unsigned int n)
 {
 	unsigned char	*_r1;
 	unsigned char	*_r2;

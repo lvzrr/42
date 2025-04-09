@@ -25,7 +25,7 @@ static int	in_set(char c, const char *set)
 	return (-1);
 }
 
-char	*ft_strtrim(char *str, const char *set)
+char	*ft_strtrim(const char *str, const char *set)
 {
 	unsigned int	b;
 	unsigned int	e;
