@@ -20,18 +20,14 @@ static void	*errorhandle(t_list *newl, void *tmp, void (*del)(void *))
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		len;
-	int		i;
 	void	*tmp;
 	t_list	*newl;
 	t_list	*newnode;
 
 	if (!lst || !f || !del)
 		return (NULL);
-	len = ft_lstsize(lst);
 	newl = NULL;
-	i = 0;
-	while (i < len && lst)
+	while (lst)
 	{
 		tmp = f(lst->content);
 		newnode = ft_lstnew(tmp);
