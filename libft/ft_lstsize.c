@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 16:01:43 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/04/07 16:05:16 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/04/09 00:13:55 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/04/09 00:15:28 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strrchr(const char *haystack, int needle)
+int	ft_lstsize(t_list *lst)
 {
 	int	l;
 
-	l = ft_strlen(haystack);
-	while (l >= 0 && haystack[l] != (char)needle)
-		l--;
-	if (haystack[l] != (char)needle)
-		return (NULL);
-	return ((char *)(haystack + l));
+	l = 0;
+	if (!lst)
+		return (0);
+	while (lst)
+	{
+		lst = lst->next;
+		l++;
+	}
+	return (l);
 }

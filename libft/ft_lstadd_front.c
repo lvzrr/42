@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 16:01:43 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/04/07 16:05:16 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/04/09 00:09:48 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/04/09 00:11:29 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strrchr(const char *haystack, int needle)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	l;
-
-	l = ft_strlen(haystack);
-	while (l >= 0 && haystack[l] != (char)needle)
-		l--;
-	if (haystack[l] != (char)needle)
-		return (NULL);
-	return ((char *)(haystack + l));
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

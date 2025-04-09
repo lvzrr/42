@@ -35,49 +35,74 @@ static unsigned int	count_words(char *str, char set)
 static char	*eat_literal(char *str, char set)
 {
 	int		i;
-	int		j;
 	char	*out;
 
 	i = 0;
 	while (str[i] && str[i] != set)
 		i++;
-	out = malloc(i + 1);
+	out = (char *)malloc(i + 1);
 	if (!out)
 		return (NULL);
-	j = 0;
-	while (j < i)
+	i = 0;
+	while (str[i] && str[i] != set)
 	{
-		out[j] = str[j];
-		j++;
+		out[i] = str[i];
+		i++;
 	}
-	out[j] = 0;
+	out[i] = '\0';
 	return (out);
 }
 
-char	**ft_split(const char *str, char set)
+static void	free_words(char **out)
 {
-	char			**out;
-	unsigned int	wc;
+	int	i;
+
+	i = 0;
+	while (out[i])
+		free(out[i++]);
+	free(out);
+}
+
+static int	fill_words(const char *str, char set, char **out)
+{
 	unsigned int	i;
 	unsigned int	j;
 
-	wc = count_words((char *)str, set);
-	out = (char **)malloc((wc + 1) * sizeof(char *));
-	if (!out)
-		return (NULL);
-	out[wc] = NULL;
 	i = 0;
 	j = 0;
 	while (str[i])
 	{
 		if (str[i] != set)
 		{
-			out[j++] = eat_literal((char *)(str) + i, set);
+			out[j] = eat_literal((char *)str + i, set);
+			if (!out[j])
+				return (0);
+			j++;
 			while (str[i] && str[i] != set)
 				i++;
-			i--;
+			continue ;
 		}
 		i++;
+	}
+	return (1);
+}
+
+char	**ft_split(const char *str, char set)
+{
+	char			**out;
+	unsigned int	wc;
+
+	if (!str)
+		return (NULL);
+	wc = count_words((char *)str, set);
+	out = (char **)malloc((wc + 1) * sizeof(char *));
+	if (!out)
+		return (NULL);
+	out[wc] = NULL;
+	if (!fill_words(str, set, out))
+	{
+		free_words(out);
+		return (NULL);
 	}
 	return (out);
 }
