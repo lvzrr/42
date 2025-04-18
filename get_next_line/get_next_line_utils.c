@@ -5,86 +5,101 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 15:13:23 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/04/10 15:13:36 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/04/18 16:49:02 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/04/18 16:49:03 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-void	free_buffers(void *a, void *b, void *c)
+char	*ft_substr(char const *s, size_t start, size_t len)
 {
-	if (a)
-		free(a);
-	if (b)
-		free(b);
-	if (c)
-		free(c);
-}
+	unsigned int	j;
+	char			*out;
 
-size_t	ft_strlen(char *s)
-{
-	size_t	l;
-
-	l = 0;
-	while (s[l])
-		l++;
-	return (l);
-}
-
-size_t	ft_strlcat(char *dest, const char *src, size_t n)
-{
-	size_t	srclen;
-	size_t	dstlen;
-	size_t	i;
-
-	srclen = 0;
-	while (src[srclen])
-		srclen++;
-	dstlen = 0;
-	while (dest[dstlen] && dstlen < n)
-		dstlen++;
-	if (n <= dstlen)
-		return (srclen + n);
-	i = 0;
-	while (dstlen + i < n - 1 && src[i])
-	{
-		dest[dstlen + i] = src[i];
-		i++;
-	}
-	dest[dstlen + i] = 0;
-	return (srclen + dstlen);
-}
-
-char	*ft_join(char *s1, char *s2)
-{
-	size_t	l;
-	char	*out;
-
-	l = ft_strlen(s1) + ft_strlen(s2) + 1;
-	out = malloc(l);
+	if (!s)
+		return (NULL);
+	if (len == 0 || start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	out = malloc(len + 1);
 	if (!out)
 		return (NULL);
-	ft_memset(out, 0, l);
-	ft_strlcat(out, s1, l);
-	ft_strlcat(out, s2, l);
-	free_buffers(s1, s2, NULL);
+	j = 0;
+	while (j < len && s[start])
+		out[j++] = s[start++];
+	out[j] = 0;
 	return (out);
 }
 
-char	*read_buf(int fd)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*buf;
-	int		bytes_read;
+	unsigned int	l1;
+	unsigned int	l2;
+	unsigned int	i;
+	unsigned int	j;
+	char			*out;
 
-	buf = malloc(BUFFER_SIZE + 1);
-	if (!buf)
+	if (!s1 || !s2)
 		return (NULL);
-	bytes_read = read(fd, buf, BUFFER_SIZE);
-	if (bytes_read <= 0)
+	l1 = ft_strlen(s1);
+	l2 = ft_strlen(s2);
+	out = malloc(l1 + l2 + 1);
+	if (!out)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (j < l1)
+		out[i++] = s1[j++];
+	j = 0;
+	while (j < l2)
+		out[i++] = s2[j++];
+	out[i] = 0;
+	return (out);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	x;
+
+	if (!str)
+		return (0);
+	x = 0;
+	while (str[x])
+		x++;
+	return (x);
+}
+
+char	*ft_strchr(const char *haystack, int needle)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (haystack[i] && haystack[i] != (char)needle)
+		i++;
+	if (haystack[i] == 0 && (char)needle != 0)
+		return ((void *) 0);
+	return ((char *)(haystack + i));
+}
+
+char	*ft_strdup(const char *str)
+{
+	unsigned int	i;
+	unsigned int	n;
+	char			*newstr;
+
+	n = 0;
+	while (str[n])
+		n++;
+	i = 0;
+	newstr = (char *)malloc(n + 1);
+	if (!newstr)
+		return ((void *) 0);
+	while (i < n)
 	{
-		free(buf);
-		return (NULL);
+		newstr[i] = str[i];
+		i++;
 	}
-	buf[bytes_read] = '\0';
-	return (buf);
+	newstr[i] = 0;
+	return (newstr);
 }

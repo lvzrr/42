@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 12:57:24 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/04/10 12:58:28 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/04/18 10:59:50 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/04/18 11:01:08 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 10
 # endif
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 char	*get_next_line(int fd);
-char	*ft_join(char *s1, char *s2);
-void	*ft_memset(void *s, int c, size_t n);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-size_t	ft_strlen(char *s);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-char	*read_buf(int fd);
-char	*read_join(char *cache, int fd);
-char	*ft_strdupto(char *src, char c);
+size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int needle);
+char	*ft_substr(const char *str, size_t n, size_t l);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(const char *s1, const char *s2);
+void	*ft_realloc(void *a, size_t m, size_t n);
 
 #endif

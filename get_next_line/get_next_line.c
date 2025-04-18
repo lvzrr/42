@@ -5,116 +5,128 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaicastr <jaicastr@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 01:18:40 by jaicastr          #+#    #+#             */
-/*   Updated: 2025/04/10 01:19:37 by jaicastr         ###   ########.fr       */
+/*   Created: 2025/04/18 12:42:53 by jaicastr          #+#    #+#             */
+/*   Updated: 2025/04/18 12:42:54 by jaicastr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
 
-char	*read_join(char *cache, int fd)
+void	*free_buf(char **ptr)
 {
-	char	*temp;
-
-	temp = read_buf(fd);
-	if (!temp)
-	{
-		free(cache);
-		return (NULL);
-	}
-	cache = ft_join(cache, temp);
-	return (cache);
+	free(*ptr);
+	*ptr = NULL;
+	return (NULL);
 }
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*manage_buffer(char *buffer)
 {
-	unsigned char	*p;
+	char	*brkpnt;
+	char	*realloc;
+	size_t	newlpos;
 
-	p = (unsigned char *)s;
-	while (n-- > 0)
-		*p++ = (unsigned char)c;
-	return ((void *) s);
-}
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	unsigned char	*s;
-	unsigned char	*d;
-	size_t			i;
-
-	if (src == dest)
-		return (dest);
-	s = (unsigned char *)src;
-	d = (unsigned char *)dest;
-	i = 0;
-	if (s < d)
+	brkpnt = ft_strchr(buffer, '\n');
+	if (!brkpnt)
 	{
-		while (n-- > 0)
-			d[n] = s[n];
+		realloc = NULL;
+		return (free_buf(&buffer));
 	}
 	else
-	{
-		while (i < n)
-		{
-			d[i] = s[i];
-			i++;
-		}
-	}
-	return (dest);
+		newlpos = (brkpnt - buffer) + 1;
+	if (!buffer[newlpos])
+		return (free_buf(&buffer));
+	realloc = ft_substr(buffer, newlpos, ft_strlen(buffer) - newlpos);
+	if (!realloc)
+		return (free_buf(&buffer));
+	free_buf(&buffer);
+	return (realloc);
 }
 
-char	*ft_strdupto(char *src, char c)
+char	*getl(char *buffer)
 {
-	size_t	i;
-	size_t	j;
-	size_t	src_len;
-	char	*out;
+	char	*line;
+	char	*p;
+	size_t	l;
 
-	i = 0;
-	while (src[i] && src[i] != c)
-		i++;
-	if (src[i] == c)
-		i++;
-	out = malloc(i + 1);
-	if (!out)
+	if (!buffer)
 		return (NULL);
-	j = 0;
-	while (j < i)
+	p = ft_strchr(buffer, '\n');
+	if (p)
+		l = (p - buffer) + 1;
+	else
+		l = ft_strlen(buffer);
+	line = ft_substr(buffer, 0, l);
+	if (!line)
+		return (free_buf(&buffer));
+	return (line);
+}
+
+char	*read_buffer(int fd, char *buffer)
+{
+	char	*tmp;
+	char	*joined;
+	int		bread;
+
+	tmp = malloc(BUFFER_SIZE + 1);
+	if (!tmp)
+		return (free_buf(&buffer));
+	bread = 1;
+	while (bread > 0 && !ft_strchr(buffer, '\n'))
 	{
-		out[j] = src[j];
-		j++;
+		bread = read(fd, tmp, BUFFER_SIZE);
+		if (bread > 0)
+		{
+			tmp[bread] = '\0';
+			joined = ft_strjoin(buffer, tmp);
+			if (!joined)
+				return (free_buf(&buffer));
+			free(buffer);
+			buffer = joined;
+		}
 	}
-	out[i] = '\0';
-	src_len = ft_strlen(src);
-	ft_memmove(src, src + i, src_len - i + 1);
-	ft_memset(src + src_len - i, 0, i);
-	return (out);
+	free(tmp);
+	if (bread == -1)
+		return (free_buf(&buffer));
+	return (buffer);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*cache;
-	int			i;
+	static char	*buffer;
+	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!cache)
+	if (!buffer)
 	{
-		cache = malloc(BUFFER_SIZE + 1);
-		if (!cache)
+		buffer = ft_strdup("");
+		if (!buffer)
 			return (NULL);
-		ft_memset(cache, 0, BUFFER_SIZE + 1);
 	}
-	i = 0;
-	while (cache[i] && cache[i] != '\n')
-		i++;
-	while (!cache[i])
+	if (!ft_strchr(buffer, '\n'))
 	{
-		cache = read_join(cache, fd);
-		if (!cache)
-			return (NULL);
-		i = 0;
-		while (cache[i] && cache[i] != '\n')
-			i++;
+		buffer = read_buffer(fd, buffer);
+		if (!buffer || buffer[0] == '\0')
+			return (free_buf(&buffer));
 	}
-	return (ft_strdupto(cache, '\n'));
+	line = getl(buffer);
+	if (!line)
+		return (free_buf(&buffer));
+	buffer = manage_buffer(buffer);
+	return (line);
 }
+
+// #include <stdio.h>
+// #include <unistd.h>
+// #include <fcntl.h>
+// int	main(void)
+// {
+// 	char *line;
+//
+// 	int i = 0;
+// 	while ((line = get_next_line(0)))
+// 	{
+// 		printf("LINEA %d: %s\n", i++, line);
+// 		free(line);
+// 	}
+// 	return (0);
+// }
